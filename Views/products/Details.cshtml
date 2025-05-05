@@ -1,0 +1,57 @@
+﻿@model WebClothesMVC.Models.product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nama_product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nama_product)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            <img src="@Url.Content("~/Content/images/" + Model.gambar)" alt="Gambar" style="max-width:100px; max-height:100px;" />
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gambar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_at)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_product }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

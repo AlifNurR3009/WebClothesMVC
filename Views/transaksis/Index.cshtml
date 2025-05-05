@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebClothesMVC.Models.transaksi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QOH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subtotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cart.username_customer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employe.email_employe)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QOH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subtotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cart.username_customer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employe.email_employe)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_transaksi }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_transaksi }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_transaksi })
+        </td>
+    </tr>
+}
+
+</table>

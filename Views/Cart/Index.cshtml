@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebClothesMVC.Models.cart>
+
+@{
+    ViewBag.HideNavbar = true;
+}
+
+<h2>Your Cart</h2>
+
+<!-- Tombol Back dan Ubah Semua -->
+<div class="d-flex justify-content-between mb-3">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back</a>
+
+    <form action="@Url.Action("UpdateAll", "Cart")" method="post">
+        <button type="submit" class="btn btn-primary">Ubah Semua</button>
+</div>
+
+<!-- Tabel Cart -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>@Model.ElementAt(i).product.nama_product</td>
+                <td>
+                    <input type="hidden" name="carts[@i].id_cart" value="@Model.ElementAt(i).id_cart" />
+                    <input type="number" name="carts[@i].quantity" value="@Model.ElementAt(i).quantity" min="1" class="form-control" style="width:80px;" />
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "Cart", new { id = Model.ElementAt(i).id_cart })" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Tutup form setelah tabel -->
+</form>

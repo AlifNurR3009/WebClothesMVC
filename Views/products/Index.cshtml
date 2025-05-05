@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebClothesMVC.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Session["username"] != null)
+{
+    <div class="text-end me-3">
+        <span>Halo, @Session["username"]!</span> |
+        <a href="@Url.Action("Logout", "Account")" class="btn btn-sm btn-danger">Logout</a>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nama_product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gambar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_at)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nama_product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                Rp.@Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/images/" + item.gambar)" alt="Gambar" style="max-width:100px; max-height:100px;" />
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.updated_at)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_product }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_product }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_product })
+            </td>
+        </tr>
+    }
+
+</table>
