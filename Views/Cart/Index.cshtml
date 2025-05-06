@@ -6,12 +6,20 @@
 
 <h2>Your Cart</h2>
 
+@if (TempData["NoChanges"] != null)
+{
+    <script>
+        toastr.warning('@TempData["NoChanges"]', 'Pemberitahuan');
+    </script>
+}
+
 <!-- Tombol Back dan Ubah Semua -->
 <div class="d-flex justify-content-between mb-3">
     <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back</a>
 
     <form action="@Url.Action("UpdateAll", "Cart")" method="post">
         <button type="submit" class="btn btn-primary">Ubah Semua</button>
+    </form> <!-- Ini adalah penutupan form yang sebelumnya hilang -->
 </div>
 
 <!-- Tabel Cart -->
@@ -37,8 +45,7 @@
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
 
-<!-- Tutup form setelah tabel -->
-</form>

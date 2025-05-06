@@ -56,22 +56,61 @@ namespace WebClothesMVC.Controllers
             return RedirectToAction("Index");
         }
 
+
         [HttpPost]
         public ActionResult UpdateAll(List<cart> carts)
         {
+
+            if (carts == null || carts.Count == 0)
+            {
+                // Mengarahkan ke halaman error atau menampilkan notifikasi jika carts null atau kosong
+                TempData["NoChanges"] = "Tidak ada perubahan atau data keranjang kosong.";
+                return RedirectToAction("Index");
+            }
+
+            bool isUpdated = false;
+
             foreach (var item in carts)
             {
                 var existingItem = db.carts.Find(item.id_cart);
                 if (existingItem != null && item.quantity > 0)
                 {
-                    existingItem.quantity = item.quantity;
-                    existingItem.created_at = DateTime.Now;
+                    if (existingItem.quantity != item.quantity)
+                    {
+                        existingItem.quantity = item.quantity;
+                        existingItem.created_at = DateTime.Now;
+                        isUpdated = true;
+                    }
                 }
             }
 
             db.SaveChanges();
+
+            if (!isUpdated)
+            {
+                TempData["NoChanges"] = "Tidak ada perubahan pada kuantitas.";
+                return RedirectToAction("Index");
+            }
+
             return RedirectToAction("Index");
         }
+
+        //[HttpPost]
+        //public ActionResult UpdateAll(List<cart> carts)
+        //{
+        //    if (carts == null)
+        //    {
+        //        // Tambahkan log untuk debugging
+        //        Console.WriteLine("carts is null");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine($"carts count: {carts.Count}");
+        //    }
+
+        //    // Sisa kode seperti sebelumnya...
+        //}
+
 
         public ActionResult Delete(int id)
         {

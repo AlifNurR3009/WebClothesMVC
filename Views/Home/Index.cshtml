@@ -42,35 +42,34 @@
         <p class="text-muted">Find the best products with the best prices!</p>
     </div>
 
-    <form asp-controller="Home" asp-action="BuyNow" method="post">
-        <div class="row justify-content-center">
-            @foreach (var item in Model)
-            {
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
-                    <div class="card equal-card hover-zoom">
-                        <div class="image-container">
-                            <img src="@Url.Content("~/Content/images/" + item.gambar)" alt="Gambar" style="max-width:100px; max-height:100px;" />
-                        </div>
-                        <div class="card-body text-center d-flex flex-column">
-                            <h5 class="card-title">@item.nama_product</h5>
-                            <p class="card-text">Rp @item.price.ToString("N2")</p>
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                <div class="card equal-card hover-zoom">
+                    <div class="image-container">
+                        <img src="@Url.Content("~/Content/images/" + item.gambar)" alt="Gambar" style="max-width:100px; max-height:100px;" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title">@item.nama_product</h5>
+                        <p class="card-text">Rp @item.price.ToString("N2")</p>
 
-                            <!-- Form untuk tambah ke cart -->
-                            <form action="@Url.Action("AddToCart", "Cart")" method="post" class="mt-auto">
-                                <input type="hidden" name="id_product" value="@item.id_product" />
-                                <div class="d-flex justify-content-center align-items-center mb-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" onclick="decreaseQuantity(this)">-</button>
-                                    <input name="quantity" type="text" class="form-control text-center" value="1" style="width: 50px;" />
-                                    <button type="button" class="btn btn-outline-secondary btn-sm ms-2" onclick="increaseQuantity(this)">+</button>
-                                </div>
-                                <button type="submit" class="btn btn-success">Add to Cart</button>
-                            </form>
-                        </div>
+                        <!-- Satu-satu form untuk setiap produk -->
+                        <form action="@Url.Action("AddToCart", "Cart")" method="post" class="mt-auto">
+                            <input type="hidden" name="id_product" value="@item.id_product" />
+                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                <button type="button" class="btn btn-outline-secondary btn-sm me-2" onclick="decreaseQuantity(this)">-</button>
+                                <input name="quantity" type="text" class="form-control text-center" value="1" style="width: 50px;" />
+                                <button type="button" class="btn btn-outline-secondary btn-sm ms-2" onclick="increaseQuantity(this)">+</button>
+                            </div>
+                            <button type="submit" class="btn btn-success">Add to Cart</button>
+                        </form>
                     </div>
                 </div>
-            }
-        </div>
-    </form>
+            </div>
+        }
+    </div>
+
 </section>
 
 <!-- ABOUT SECTION -->
